@@ -470,7 +470,8 @@ def _run(args):
     current_job = 0
     if args.resume or args.resume_from:
         if not os.path.exists(save_file):
-            raise ResumeException("Can't find save file")
+            raise ResumeException("Can't resume, please check if the output directory contains intermediate results from previous Flye run. "
+                                  "Otherwise, make a new run without --resume option")
 
         logger.info("Resuming previous run")
         if args.resume_from:
