@@ -6,6 +6,10 @@ from __future__ import absolute_import
 import os
 import signal
 import multiprocessing
+import logging
+
+
+logger = logging.getLogger()
 
 
 def which(program):
