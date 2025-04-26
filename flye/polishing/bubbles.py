@@ -97,7 +97,8 @@ def _thread_worker(aln_reader, chunk_feeder, contigs_info, err_mode,
             if bubbles_file_lock:
                 bubbles_file_lock.acquire()
 
-            _output_bubbles(ctg_bubbles, open(bubbles_file, "a"))
+            with open(bubbles_file, "a") as fout:
+                _output_bubbles(ctg_bubbles, fout)
             results_queue.put((ctg_id, len(ctg_bubbles), num_long_bubbles,
                                num_empty, num_long_branch, aln_errors,
                                mean_cov))
