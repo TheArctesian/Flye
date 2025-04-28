@@ -274,7 +274,7 @@ def _run_minimap(reference_file, reads_files, num_proc, reads_type, out_file):
                               "set -eo pipefail; " + " ".join(cmdline)],
                               stderr=open(stderr_file, "w"),
                               stdout=open(os.devnull, "w"))
-        subprocess.check_call(SAMTOOLS_BIN + " index -@ 4 " + "'" + out_file + "'", shell=True)
+        subprocess.check_call(SAMTOOLS_BIN + " index -c -@ 4 " + "'" + out_file + "'", shell=True)
         #os.remove(stderr_file)
 
     except (subprocess.CalledProcessError, OSError) as e:

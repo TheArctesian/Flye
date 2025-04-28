@@ -198,7 +198,7 @@ class SynchronizedSamReader(object):
         #check that alignment exists
         if not os.path.exists(sam_alignment):
             raise AlignmentException("Can't open {0}".format(sam_alignment))
-        if not os.path.exists(sam_alignment + ".bai"):
+        if not (os.path.exists(sam_alignment + ".bai") or os.path.exists(sam_alignment + ".csi")):
             raise AlignmentException("Bam not indexed: {0}".format(sam_alignment))
 
         #will not be changed during exceution, each process has its own copy
