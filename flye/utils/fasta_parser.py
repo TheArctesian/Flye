@@ -64,16 +64,22 @@ def stream_sequence(filename):
             handle = io.BufferedReader(gz)
 
         if fastq:
-            for hdr, seq, _ in _read_fastq(handle):
+            for line, (hdr, seq, _) in enumerate(_read_fastq(handle)):
+                if b'@' in hdr:
+                    raise FastaError("Fasta/q sequence header has '@' symbol in file: {0}, entry {1}"
+                                     .format(filename, line))
                 if not _validate_seq(seq):
-                    raise FastaError("Invalid char while reading {0}"
-                                     .format(filename))
+                    raise FastaError("Invalid sequence symbol in file: {0}, entry {1}"
+                                     .format(filename, line))
                 yield _STR(hdr), _STR(_to_acgt_bytes(seq))
         else:
-            for hdr, seq in _read_fasta(handle):
+            for line, (hdr, seq) in enumerate(_read_fasta(handle)):
+                if b'@' in hdr:
+                    raise FastaError("Fasta/q sequence header has '@' symbol in file: {0}, entry {1}"
+                                     .format(filename, line))
                 if not _validate_seq(seq):
-                    raise FastaError("Invalid char while reading {0}"
-                                     .format(filename))
+                    raise FastaError("Invalid sequence symbol in file: {0}, entry {1}"
+                                     .format(filename, line))
                 yield _STR(hdr), _STR(_to_acgt_bytes(seq))
 
     except IOError as e:
