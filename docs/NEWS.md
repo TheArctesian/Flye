@@ -1,3 +1,9 @@
+Flye 2.9.6 release (2 May 2025)
+==============================
+* Minor fix release, most assmeblies should not change
+* Fixed rare race condition in polishing stage
+* R10 ONT parameters (3% error) are now default for --nano-hq
+
 Flye 2.9.5 release (27 Aug 2024)
 ===============================
 * Python 3.12 support, Python 2 dropped
