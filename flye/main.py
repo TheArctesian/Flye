@@ -543,7 +543,7 @@ def _epilog():
     return ("Input reads can be in FASTA or FASTQ format, uncompressed\n"
             "or compressed with gz. Currently, PacBio (CLR, HiFi, corrected)\n"
             "and ONT reads (regular, HQ, corrected) are supported. Expected error rates are\n"
-            "<15% for PB CLR/regular ONT; <5% for ONT HQ, <3% for corrected, and <1% for HiFi. Note that Flye\n"
+            "<15% for PB CLR/regular ONT; <3% for ONT R10, <3% for corrected, and <1% for HiFi. Note that Flye\n"
             "was primarily developed to run on uncorrected reads. You may specify multiple\n"
             "files with reads (separated by spaces). Mixing different read\n"
             "types is not yet supported. The --meta option enables the mode\n"
@@ -598,13 +598,13 @@ def main():
                         help="PacBio HiFi reads (<1%% error)")
     read_group.add_argument("--nano-raw", dest="nano_raw", nargs="+",
                         default=None, metavar="path",
-                        help="ONT regular reads, pre-Guppy5 (<20%% error)")
+                        help="ONT reads with odler chemistries, pre R9 Guppy5 (10-20%% error)")
     read_group.add_argument("--nano-corr", dest="nano_corrected", nargs="+",
                         default=None, metavar="path",
                         help="ONT reads that were corrected with other methods (<3%% error)")
     read_group.add_argument("--nano-hq", dest="nano_hq", nargs="+",
                         default=None, metavar="path",
-                        help="ONT high-quality reads: Guppy5+ SUP or Q20 (<5%% error)")
+                        help="ONT R10 reads, aka Q20 (<3%% error). For R9 Guppy5+, increase --read-error slightly")
     read_group.add_argument("--subassemblies", dest="subassemblies", nargs="+",
                         default=None, metavar="path",
                         help="[deprecated] high-quality contigs input")

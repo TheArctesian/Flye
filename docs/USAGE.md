@@ -124,14 +124,13 @@ The dataset was originally released by the
 
 ### Oxford Nanopore
 
-* The default mode for regular ONT data is `--nano-raw`. It works well for a good
-range of datasets, from old R7 pores to the most recent R9.x and R10.x. The
+* For R10 data, use `--nano-hq`. Expected error rate is <3%.
+
+* For the R9 data basecalled with Guppy5+ use the new `--nano-hq --read-error 0.05`.
+The expected error rate is <5%.
+
+* For older ONT data (e.g. R7-older R9 chemistry) use  `--nano-raw`. The
 expected error rate is 10-15%.
-
-* For the most recent ONT data basecalled with Guppy5+ SUP use the new `--nano-hq` mode.
-Expected error rate is <5%.
-
-* For Q20 data, use a combination of `--nano-hq` and `--read-error 0.03`.
 
 * If you have error-corrected ONT reads (with methods such as Canu), use `--nano-corr`.
 
@@ -153,7 +152,6 @@ Error could be adjusted via `--read-error`.
 * If you have error-corrected PacBio reads (with methods such as Canu), use `--pacbio-corr`.
 
 ### Consensus of multiple contig sets
-
 WARNING: this mode is being deprecated and will be removed in the future versions.
 This is to make the future maintenance of Flye easier. Instead, we suggest to use
 more specialized software, like [quickmerge](https://github.com/mahulchak/quickmerge).
